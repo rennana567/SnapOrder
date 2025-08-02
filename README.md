@@ -2,7 +2,14 @@
 
 ## 技术栈
 - React 全家桶
-  待完善...
+    React 组件开发
+    组件的封装
+    第三方组件库
+    hooks编程 自定义
+    React-Router-DOM
+      SPA
+      懒加载
+    memo
 - module css
 - vite 配置
 - git 提交等编程风格
@@ -12,9 +19,15 @@
 - src
   - api
   - components
+    - BlankLayout
+    - Loading
+    - MainLayout
   - hooks
+    - useTitle
   - pages
     - Account
+    - Collection
+    - Consultant
     - Home
     - Login
     - NotFound
@@ -63,7 +76,19 @@
 ## 功能模块
 - UI 组件库
   - react-vant  第三方组件库
-
+- 配置路由及懒加载
+  - 懒加载
+  - 路由守卫
+  - Layout组件
+    - 嵌套路由Outlet 分组路由配置
+    - 网页有几个模板 Layout
+      - Route 不加path 对应的路由自动选择
+      - tabbar 模板
+      - blank 模板
+  - tabbar
+    - react-vant + @react-vant/icons
+    - value + onChange 响应式
+    - 直接点击tabbar 切换路由
 ## 项目亮点和难点
 - 移动端适配 还原设计稿
   - lib-flexible  1rem = 屏幕宽度/10
@@ -80,8 +105,23 @@
       一个元素按功能逻辑拆分成多个类，和原子一样
       元素的样式就可以由这些原子类组合而成
       样式可以复用的更好，以后几乎可以不用写样式
+- 自定义组件
+  useTitle  切换页面标题也切换为对应的标题
 - 用户体验优化
+  - 组件粒度划分
+    React.memo
+  - 懒加载
+  - SPA
 
 ## 项目遇到过什么问题，怎么解决的
-
+- es6 特性使用
+  tabbar的高亮
+  - arr.findIndex
+  - str.startsWith
+  - promise
 ## 通用组件开发
+- Loading
+  - 居中方案
+    position: fixed;+ tlrb0 + margin: auto;
+  - React.memo 无状态组件，不重新渲染
+  - animation

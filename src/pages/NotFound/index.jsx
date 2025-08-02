@@ -1,7 +1,8 @@
-// 作为页面级别组件 - 推荐方式
 import { Link } from 'react-router-dom';
+import useTitle from '@/hooks/useTitle'
 
 function NotFound() {
+  useTitle('404 - 页面未找到')
   return (
     <div style={{ textAlign: 'center', padding: '50px' }}>
       <h1>404 - 页面未找到</h1>
