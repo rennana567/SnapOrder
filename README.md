@@ -10,14 +10,24 @@
       SPA
       懒加载
     memo
+    Zustand
 - module css
 - vite 配置
+- 移动端适配
 - git 提交等编程风格
+- mock 接口模拟
+- axios 请求拦截和代理
+- 性能优化
+  防抖节流
+
 
 ## 项目的架构
 - mock
+  - data.js
 - src
   - api
+    - config.js
+    - search.js
   - components
     - BlankLayout
     - Loading
@@ -34,6 +44,8 @@
     - Order
     - Search
   - store
+    - useSearchStore.js
+  - utils
 
 ## 开发前的准备
 - 安装的包
@@ -89,6 +101,11 @@
     - react-vant + @react-vant/icons
     - value + onChange 响应式
     - 直接点击tabbar 切换路由
+- Search
+  - 防抖
+  - api
+    GoogleSuggest
+  - localStorage
 ## 项目亮点和难点
 - 移动端适配 还原设计稿
   - lib-flexible  1rem = 屏幕宽度/10
@@ -112,6 +129,8 @@
     React.memo
   - 懒加载
   - SPA
+  - 搜索建议  防抖
+  - 热门推荐
 
 ## 项目遇到过什么问题，怎么解决的
 - es6 特性使用
@@ -119,6 +138,9 @@
   - arr.findIndex
   - str.startsWith
   - promise
+- Uncaught TypeError: hotList.map is not a function
+  打印hotList  —— 对象？
+  config拦截再加一层.data
 ## 通用组件开发
 - Loading
   - 居中方案
