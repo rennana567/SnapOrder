@@ -19,7 +19,9 @@
 - axios 请求拦截和代理
 - 性能优化
   防抖节流
-
+  useMemo
+-LLM
+  - chat
 
 ## 项目的架构
 - mock
@@ -34,6 +36,7 @@
     - MainLayout
   - hooks
     - useTitle
+  - llm
   - pages
     - Account
     - Collection
@@ -106,6 +109,9 @@
   - api
     GoogleSuggest
   - localStorage
+- chatbot 模块
+  - llm模块 chat 封装
+  - 迭代chat， 支持任意模型
 ## 项目亮点和难点
 - 移动端适配 还原设计稿
   - lib-flexible  1rem = 屏幕宽度/10
@@ -131,7 +137,11 @@
   - SPA
   - 搜索建议  防抖
   - 热门推荐
-
+- 前端智能
+  - chat 函数
+  - 对各家模型比较感兴趣，升级为kimiChat、302ai...
+    性能、能力、性价比
+    随意切换大模型，通过参数抽象
 ## 项目遇到过什么问题，怎么解决的
 - es6 特性使用
   tabbar的高亮
@@ -141,6 +151,16 @@
 - Uncaught TypeError: hotList.map is not a function
   打印hotList  —— 对象？
   config拦截再加一层.data
+- 自定义hooks
+  两次useEffect 和页面是否加载完成没关系
+  直接去掉useEffect
+- chat messages 覆盖问题
+  闭包问题 直接设置值导致
+  (prev)=>{} 处理
+- 项目迭代
+  - 功能由浅入深
+  - chatbot deepseek 简单chat
+
 ## 通用组件开发
 - Loading
   - 居中方案

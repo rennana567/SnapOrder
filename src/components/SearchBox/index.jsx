@@ -37,7 +37,7 @@ const searchBox = (props) => {
     })
     
     useEffect(()=>{
-        console.log(query,'////////////')
+        // console.log(query,'////////////')
         handleQueryDebounce(query)
     }, [query])
 
@@ -47,7 +47,7 @@ const searchBox = (props) => {
             <input 
             type="text" 
             className={styles.ipt}
-            placeholder='搜索旅游相关'
+            placeholder='搜索菜品'
             ref={queryRef}
             onChange={handleChange}
             />

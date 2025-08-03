@@ -33,13 +33,13 @@ export default [{
             code: 0,
             data:[{
                 id: '101',
-                city: "北京"
+                city: "北京烤鸭"
             },{
                 id: '102',
-                city: "上海"
+                city: "上海生菜"
             }, {
                 id: '103',
-                city: "福州"
+                city: "福州鱼丸"
             },]
         }
     }

@@ -3,10 +3,12 @@ import {
     useState, 
     useEffect,
     memo,
-    useCallback 
+    useCallback, 
+    use
 } from 'react';
 import styles from './search.module.css';
 import useSearchStore from '@/store/useSearchStore';
+import useTitle from '@/hooks/useTitle'
 
 const HotListItems = memo((prpos) => {
     // console.log('-------',prpos)
@@ -14,7 +16,7 @@ const HotListItems = memo((prpos) => {
     // console.log('hotList1111',hotList)
     return(
       <div className={styles.hot}>
-          <h1>热门景点推荐</h1>
+          <h1>热门菜品推荐</h1>
           {
             hotList.map((item)=>(
               <div key={item.id} className={styles.item}>{item.city}</div>
@@ -24,6 +26,7 @@ const HotListItems = memo((prpos) => {
     )
 })
 const SearchPage = () => {
+  useTitle('搜索');
   const [query, setQuery] = useState('');
   const {
     hotList,
