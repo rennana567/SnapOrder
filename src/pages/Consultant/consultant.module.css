@@ -1,4 +1,3 @@
-/* src/pages/Consultant/consultant.module.css */
 .chatArea {
     overflow-y: auto;
     padding: 16px;
@@ -6,6 +5,9 @@
     background-image: linear-gradient(#f0f0f0 1px, transparent 1px),
                       linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
     background-size: 20px 20px;
+    /* 计算高度以避免被标签栏遮挡 */
+    height: calc(100vh - 110px); /* 50px标签栏 + 60px输入区域 */
+    max-height: calc(100vh - 110px);
 }
 
 .inputArea {
@@ -13,6 +15,11 @@
     border-top: 1px solid #e0e0e0;
     background: white;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    /* 确保输入区域不会被标签栏遮挡 */
+    margin-bottom: 1px;
 }
 
 .input {
@@ -37,6 +44,7 @@
     position: relative;
     animation: fadeIn 0.3s ease-out;
     line-height: 1.5;
+    word-wrap: break-word;
 }
 
 .messageLeft {
@@ -96,33 +104,17 @@
     background: linear-gradient(135deg, #e05a2a 0%, #e0821c 100%);
 }
 
-/* 加载动画样式 */
-.fixed-loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-:global(.rv-loading__spinner) {
-    width: 40px;
-    height: 40px;
-}
-
 /* 响应式设计 */
 @media (max-width: 480px) {
     .chatArea {
         padding: 12px;
+        height: calc(100vh - 100px); /* 在小屏幕上微调 */
+        max-height: calc(100vh - 100px);
     }
     
     .inputArea {
         padding: 12px;
+        min-height: 50px;
     }
     
     .messageLeft, .messageRight {
@@ -169,18 +161,26 @@
     border-left: 8px solid #ff6b35;
 }
 
-/* 欢迎消息样式 */
-.welcomeMessage {
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-    margin-bottom: 20px;
+/* 流式输出光标动画 */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 16px;
+    background-color: #333;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
 }
 
-/* 系统消息样式 */
-.systemMessage {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin: 10px 0;
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.messageLeft .cursor {
+    background-color: #333;
+}
+
+.messageRight .cursor {
+    background-color: white;
 }

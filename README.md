@@ -12,6 +12,7 @@
     memo
     Zustand
     useContext
+    useRef 非受控组件
 - module css
 - vite 配置
 - 移动端适配
@@ -25,7 +26,8 @@
   - chat
   - 生图
   - coze 工作流 调用
-
+  - 流式输出
+- FileReader
 
 ## 项目的架构
 - mock
@@ -45,7 +47,6 @@
   - llm
   - pages
     - Account
-    - Collection
     - Consultant
     - Home
     - Login
@@ -188,6 +189,7 @@
   - coze工作流接口调用 查阅文档
 - 使用coze生成图像后上传问题
   - 使用useContext 存储用户信息并保存到localStorage
+- 数据过多遮挡输入框  css固定，不用flex
 ## 通用组件开发
 - Loading
   - 居中方案

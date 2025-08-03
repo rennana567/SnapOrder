@@ -2,12 +2,14 @@
 import useTitle from '@/hooks/useTitle'
 import {
   useState,
+  useRef
 } from 'react'
 import {
   Image,
   Cell,
   CellGroup,
   ActionSheet,
+  Toast
 } from 'react-vant'
 import {
   ServiceO,
@@ -26,8 +28,11 @@ import {
 import styles from './account.module.css'
 import { useUser } from '@/contexts/UserContext'
 import { useNavigate } from 'react-router-dom'
+
 const Account = () => {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null); // 添加文件输入引用
+  
   const gridData = [
     { icon: <AddO />, text: '添加' },
     { icon: <CartO />, text: '购物车' },
@@ -43,18 +48,59 @@ const Account = () => {
   useTitle('我的账户')
   
   // 使用Context中的用户信息
-  const { userInfo } = useUser();
+  const { userInfo, updateAvatar } = useUser();
   const [showActionSheet, setShowActionSheet] = useState(false);
   
+  // 处理头像操作
   const handleAction = async (e) => {
     console.log(e);
     if(e.type === 1){
       // AI生成头像
       navigate('/coze');
     } else if(e.type === 2){
-      // 图片上传
+      // 图片上传 - 触发文件选择
+      fileInputRef.current?.click();
+      setShowActionSheet(false);
     }
   }
+  
+  // 处理文件选择后的上传逻辑
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    
+    // 验证文件类型
+    if (!file.type.startsWith('image/')) {
+      Toast.fail('请选择图片文件');
+      return;
+    }
+    
+    // 验证文件大小 (最大5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      Toast.fail('图片大小不能超过5MB');
+      return;
+    }
+    
+    // 使用 FileReader 读取文件
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imageDataUrl = e.target?.result;
+      if (typeof imageDataUrl === 'string') {
+        // 更新头像
+        updateAvatar(imageDataUrl);
+        Toast.success('头像上传成功');
+      }
+    };
+    
+    reader.onerror = () => {
+      Toast.fail('图片读取失败');
+    };
+    
+    reader.readAsDataURL(file);
+    
+    // 清空文件输入框，以便下次选择同一文件也能触发change事件
+    event.target.value = '';
+  };
   
   const actions = [
     {
@@ -71,6 +117,15 @@ const Account = () => {
   
   return (
     <div className={styles.container}>
+      {/* 隐藏的文件输入框 */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        accept="image/*"
+        style={{ display: 'none' }}
+      />
+      
       <div className={styles.user}>
         <Image
           round

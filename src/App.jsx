@@ -20,7 +20,6 @@ const Login = lazy(() => import('@/pages/Login'))
 const Order = lazy(() => import('@/pages/Order'))
 const Account = lazy(() => import('@/pages/Account'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
-const Collection = lazy(() => import('@/pages/Collection'))
 const Consultant = lazy(() => import('@/pages/Consultant'))
 const Coze = lazy(() => import('@/pages/Coze'))
 
@@ -37,7 +36,6 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/account" element={<Account />} />
             <Route path="/order" element={<Order />} />
-            <Route path="/collection" element={<Collection />} />
             <Route path="/consultant" element={<Consultant />} />
           </Route>
           {/* 空的Layout */}
