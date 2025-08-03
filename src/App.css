@@ -22,3 +22,13 @@
   left: 50%;
   transform: translateX(-50%);
 }
+
+.mt2 {
+  margin-top: 2px;
+}
+.mt3 {
+  margin-top: 3px;
+}
+.ml4{
+  margin-left: 16px;
+}

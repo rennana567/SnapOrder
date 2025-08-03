@@ -12,6 +12,7 @@ import './App.css'
 import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
 import Loading from '@/components/Loading'
+import { UserProvider } from '@/contexts/UserContext'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
@@ -21,11 +22,13 @@ const Account = lazy(() => import('@/pages/Account'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 const Collection = lazy(() => import('@/pages/Collection'))
 const Consultant = lazy(() => import('@/pages/Consultant'))
+const Coze = lazy(() => import('@/pages/Coze'))
 
 function App() {
 
   return (
     <>
+    <UserProvider>
       <Suspense fallback={<Loading />}>
         <Routes>
           {/* 带有标签栏的页面 */}
@@ -41,10 +44,12 @@ function App() {
           <Route element={<BlankLayout />}>
             <Route path="/login" element={<Login />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/coze" element={<Coze />} />
           </Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      </UserProvider>
     </>
   )
 }
