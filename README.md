@@ -28,6 +28,7 @@
   - coze 工作流 调用
   - 流式输出
 - FileReader
+- jwt 登录
 
 ## 项目的架构
 - mock
@@ -62,6 +63,7 @@
     react-router-dom zustand axios 
       react-vant（UI组件库）
     react-vant
+    jsonwebtoken 加密
     开发期间的依赖
     vite-plugin-mock jwt 
 - vite 配置
@@ -168,6 +170,10 @@
   - token 
   - workflowUrl + workflow_id + token
       工作流需要的参数
+- jwt 登录鉴权
+  - 登录（mock）接口（api）
+  - 颁发（sign）、验证（decode）token
+  
 ## 项目遇到过什么问题，怎么解决的
 - es6 特性使用
   tabbar的高亮
