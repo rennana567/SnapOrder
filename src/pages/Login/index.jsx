@@ -3,7 +3,7 @@ import {
 } from 'react'
 import {
     useUserStore
-} from '@/store/user'
+} from '@/store/useUserStore'
 import { useNavigate } from 'react-router-dom'
 import styles from './login.module.css'
 

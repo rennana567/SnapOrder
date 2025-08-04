@@ -23,6 +23,8 @@ const NotFound = lazy(() => import('@/pages/NotFound'))
 const Consultant = lazy(() => import('@/pages/Consultant'))
 const Coze = lazy(() => import('@/pages/Coze'))
 const RequireAuth = lazy(() => import('@/components/RequireAuth'))
+const Detail = lazy(() => import('@/pages/Detail'))
+
 function App() {
 
   return (
@@ -43,6 +45,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/search" element={<Search />} />
             <Route path="/coze" element={<Coze />} />
+          <Route path="/detail/123" element={<Detail />} />
           </Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>

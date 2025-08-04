@@ -33,14 +33,19 @@
 ## 项目的架构
 - mock
   - data.js
+  - login.js
 - src
   - api
     - config.js
+    - detail.js
     - search.js
+    - user.js
   - components
     - BlankLayout
     - Loading
     - MainLayout
+    - RequireAuth
+    - SearchBox
   - contexts
     - UserContext.jsx
   - hooks
@@ -49,13 +54,17 @@
   - pages
     - Account
     - Consultant
+    - Coze
+    - Detail
     - Home
     - Login
     - NotFound
     - Order
     - Search
   - store
+    - useDetailStore.js
     - useSearchStore.js
+    - useUserStore.js
   - utils
 
 ## 开发前的准备
@@ -173,7 +182,11 @@
 - jwt 登录鉴权
   - 登录（mock）接口（api）
   - 颁发（sign）、验证（decode）token
-  
+- 购物
+  - 面向对象设计：使用 UIGoods 和 UIData 类封装数据和操作逻辑
+  - 抛物线动画效果
+  - 购物车跳动效果
+
 ## 项目遇到过什么问题，怎么解决的
 - es6 特性使用
   tabbar的高亮
@@ -196,6 +209,10 @@
 - 使用coze生成图像后上传问题
   - 使用useContext 存储用户信息并保存到localStorage
 - 数据过多遮挡输入框  css固定，不用flex
+- 抛物线实现
+  - requestAnimationFrame  保证流畅
+  - getBoundClientReact 获取位置
+
 ## 通用组件开发
 - Loading
   - 居中方案
