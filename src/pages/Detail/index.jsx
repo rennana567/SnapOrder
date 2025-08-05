@@ -1,6 +1,6 @@
 import useTitle from "@/hooks/useTitle"
 import useDetailStore from "@/store/useDeatilStore"
-import useCartStore from "@/store/cartStore" // 添加这行
+import useCartStore from "@/store/cartStore"
 import {
     Skeleton,
     Toast,
@@ -27,6 +27,7 @@ const Detail = () => {
       getTotalQuantity,
       isCrossDeliveryThreshold
     } = useCartStore() // 使用购物车 store
+
     const navigate = useNavigate()
     
     const [uiData, setUIData] = useState(null)
@@ -61,6 +62,9 @@ const Detail = () => {
             uiDataRef.current = data
         }
     }, [loading, detail, cartItems])
+    useEffect(() => {
+        setDetail()
+    },[])
     
     // 商品数据
     class UIGoods {
@@ -130,14 +134,6 @@ const Detail = () => {
             return this.getTotalPrice() >= this.deliveryThreshold
         }
     }
-
-    useEffect(() => {
-        if (!loading && detail) {
-            const data = new UIData(detail)
-            setUIData(data)
-            uiDataRef.current = data
-        }
-    }, [loading, detail])
 
     // 抛物线动画
     const createFlyingItem = (startPos, endPos) => {

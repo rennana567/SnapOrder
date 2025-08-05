@@ -46,6 +46,7 @@
     - MainLayout
     - RequireAuth
     - SearchBox
+    - Swiper
   - contexts
     - UserContext.jsx
   - hooks
@@ -187,6 +188,7 @@
   - 面向对象设计：使用 UIGoods 和 UIData 类封装数据和操作逻辑
   - 抛物线动画效果
   - 购物车跳动效果
+- Swiper 轮播图
 
 ## 项目遇到过什么问题，怎么解决的
 - es6 特性使用
