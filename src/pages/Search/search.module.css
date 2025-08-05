@@ -1,21 +1,185 @@
 .container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  overflow: hidden;
-  background: #f2f3f4;
+  background-color: #f5f5f5;
+  height: 100%;
+  min-height: 100vh;
+  padding-bottom: 20px;
+  position: relative;
 }
+
+.wrapper {
+  padding: 0 16px;
+  position: relative;
+}
+
+/* 搜索建议列表样式 */
 .list {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 10px 0;
+  margin-top: 0;
   position: absolute;
-  top: 80px;
-  background: white;
-  bottom: 0;
-  width: 100%;
+  left: 16px;
+  right: 16px;
+  top: 70px;
+  z-index: 5;
+  max-height: 400px;
+  overflow-y: auto;
 }
-.item {
-  font-size: 24px;
-  padding: 20px 10px;
+
+.list .item {
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.list .item:last-child {
+  border-bottom: none;
+}
+
+.list .item:hover {
+  background-color: #fff5f0;
+}
+
+/* 搜索历史样式 */
+.historySection {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.historyHeader h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.clearAllIcon {
+  font-size: 20px;
+  color: #ff6b35;
+  cursor: pointer;
+}
+
+.historyList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  background: #fff5f0;
+  border: 1px solid #ffe1d2;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.historyText {
+  font-size: 14px;
+  color: #ff6b35;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.deleteIcon {
+  font-size: 14px;
+  color: #ff6b35;
+  cursor: pointer;
+}
+
+/* 热门搜索样式 */
+.hot {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.hot h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.hot .item {
+  display: block;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+}
+
+.hot .item:last-child {
+  margin-bottom: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 0 12px;
+  }
+  
+  .list {
+    left: 12px;
+    right: 12px;
+    top: 60px;
+  }
+  
+  .historySection {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .historyHeader h2 {
+    font-size: 16px;
+  }
+  
+  .historyItem {
+    padding: 4px 10px;
+  }
+  
+  .historyText {
+    font-size: 12px;
+  }
+  
+  .hot {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .hot h1 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .hot .item {
+    padding: 10px 12px;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  
+  .list .item {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
 }

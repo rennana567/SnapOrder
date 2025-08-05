@@ -17,7 +17,7 @@ import RequireAuth from '@/components/RequireAuth'
 import Toast from '@/components/Toast'
 
 const Home = lazy(() => import('@/pages/Home'))
-const Search = lazy(() => import('@/pages/Search'))
+const SearchPage = lazy(() => import('@/pages/Search'))
 const Login = lazy(() => import('@/pages/Login'))
 const Order = lazy(() => import('@/pages/Order'))
 const Account = lazy(() => import('@/pages/Account'))
@@ -45,7 +45,7 @@ function App() {
           {/* 空的Layout */}
           <Route element={<BlankLayout />}>
             <Route path="/login" element={<Login />} />
-            <Route path="/search" element={<Search />} />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/coze" element={<Coze />} />
             <Route path="/detail/123" element={<Detail />} />
             <Route path="/pay" element={

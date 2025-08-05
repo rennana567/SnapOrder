@@ -1,21 +1,72 @@
 .wrapper {
-    display: flex;
-    align-items: center;
-    padding: 0 40px 0 12px;
-    height: 80px;
-    background: #eee;
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  background-color: #f5f5f5;
 }
+
+.arrowLeft {
+  font-size: 24px;
+  color: #333;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.searchContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.searchIcon {
+  font-size: 20px;
+  color: #ff6b35;
+  margin-right: 8px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
 .ipt {
-    flex: 1;
-    margin: 0 5px;
-    line-height: 36px;
-    background: #eee;
-    color: #333;
-    font-size: 28px;
-    outline:none;
-    border: none;/*原生的input有点难看*/
-    border-bottom: 1px solid #e4e4e4;
+  flex: 1;
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: transparent;
 }
-.box:placeholder {
-    color:#1f1f1f;
+
+.clearIcon {
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 12px 0;
+  }
+  
+  .searchContainer {
+    padding: 0 10px;
+  }
+  
+  .searchIcon {
+    font-size: 18px;
+    margin-right: 6px;
+  }
+  
+  .ipt {
+    height: 36px;
+    font-size: 14px;
+  }
+  
+  .clearIcon {
+    font-size: 18px;
+  }
 }
