@@ -1,4 +1,3 @@
-// src/pages/Account/index.jsx
 import useTitle from '@/hooks/useTitle'
 import {
   useState,
@@ -31,7 +30,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Account = () => {
   const navigate = useNavigate();
-  const fileInputRef = useRef(null); // 添加文件输入引用
+  const fileInputRef = useRef(null);
   
   const gridData = [
     { icon: <AddO />, text: '添加' },
@@ -51,14 +50,13 @@ const Account = () => {
   const { userInfo, updateAvatar } = useUser();
   const [showActionSheet, setShowActionSheet] = useState(false);
   
-  // 处理头像操作
   const handleAction = async (e) => {
     console.log(e);
     if(e.type === 1){
       // AI生成头像
       navigate('/coze');
     } else if(e.type === 2){
-      // 图片上传 - 触发文件选择
+      // 图片上传
       fileInputRef.current?.click();
       setShowActionSheet(false);
     }
@@ -86,7 +84,6 @@ const Account = () => {
     reader.onload = (e) => {
       const imageDataUrl = e.target?.result;
       if (typeof imageDataUrl === 'string') {
-        // 更新头像
         updateAvatar(imageDataUrl);
         Toast.success('头像上传成功');
       }

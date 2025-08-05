@@ -14,6 +14,7 @@ import BlankLayout from '@/components/BlankLayout'
 import Loading from '@/components/Loading'
 import { UserProvider } from '@/contexts/UserContext'
 import RequireAuth from '@/components/RequireAuth'
+import Toast from '@/components/Toast'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
@@ -57,6 +58,7 @@ function App() {
         </Routes>
       </Suspense>
       </UserProvider>
+      <Toast />
     </>
   )
 }

@@ -1,5 +1,9 @@
-// src/contexts/UserContext.jsx
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+   createContext, 
+   useContext, 
+   useState, 
+   useEffect 
+} from 'react';
 
 const UserContext = createContext();
 
@@ -25,7 +29,6 @@ export const UserProvider = ({ children }) => {
 
   const [userInfo, setUserInfo] = useState(getUserInfoFromStorage);
 
-  // 本地存储
   useEffect(() => {
     try {
       localStorage.setItem('userInfo', JSON.stringify(userInfo));

@@ -1,9 +1,17 @@
-// src/pages/Home/index.jsx
 import useTitle from '@/hooks/useTitle'
 import { useNavigate } from 'react-router-dom'
-import { Search, LocationO, ShopO, CouponO, GiftO, MedalO } from '@react-vant/icons'
+import { 
+    Search, 
+    Location, 
+    ShopO, 
+    CouponO, 
+    GiftO, 
+    MedalO, 
+    Bell 
+} from '@react-vant/icons'
 import styles from './home.module.css'
 import Swiper from '@/components/Swiper'
+import { showToast } from '@/components/Toast/toastController'
 
 const Home = () => {
     useTitle('首页')
@@ -37,8 +45,8 @@ const Home = () => {
             {/* 顶部搜索栏 */}
             <div className={styles.header}>
                 <div className={styles.location}>
-                    <LocationO />
-                    <span>浙江温州江南皮革厂</span>
+                    <Location />
+                    <span>浙江温州</span>
                 </div>
                 <div 
                     className={styles.searchBox}
@@ -46,6 +54,12 @@ const Home = () => {
                 >
                     <Search />
                     <span>搜索商家、商品</span>
+                </div>
+                <div 
+                    className={styles.bellIcon}
+                    onClick={() => showToast(1, 2, 3)}
+                >
+                    <Bell  />
                 </div>
             </div>
 
