@@ -22,7 +22,7 @@
 - 性能优化
   防抖节流
   useMemo
--LLM
+- LLM
   - chat
   - 生图
   - coze 工作流 调用
@@ -38,15 +38,18 @@
   - api
     - config.js
     - detail.js
+    - order.js
     - search.js
     - user.js
   - components
     - BlankLayout
+    - ImageCard
     - Loading
     - MainLayout
     - RequireAuth
     - SearchBox
     - Swiper
+    - Waterfall
   - contexts
     - UserContext.jsx
   - hooks
@@ -65,11 +68,13 @@
   - store
     - cartStore.js
     - useDetailStore.js
+    - useImageStore.js
     - useSearchStore.js
     - useUserStore.js
   - utils
 
 ## 开发前的准备
+
 - 安装的包
     react-router-dom zustand axios 
       react-vant（UI组件库）
@@ -77,6 +82,7 @@
     jsonwebtoken 加密
     开发期间的依赖
     vite-plugin-mock jwt 
+
 - vite 配置
   - alias
   - mock
@@ -95,6 +101,7 @@
       layout
       flexible.js 阿里的 在任何设备上
       1rem = 屏幕宽度/10
+
 - lib-flexible
   阿里开源
   设置html fontSize = window
@@ -109,8 +116,10 @@
   node_modules/
   *.local
 ## 功能模块
+
 - UI 组件库
   - react-vant  第三方组件库
+
 - 配置路由及懒加载
   - 懒加载
   - 路由守卫
@@ -124,6 +133,7 @@
     - react-vant + @react-vant/icons
     - value + onChange 响应式
     - 直接点击tabbar 切换路由
+
 - Search
   - 防抖
   - api
@@ -132,7 +142,24 @@
 - chatbot 模块
   - llm模块 chat 封装
   - 迭代chat， 支持任意模型
+
+- 瀑布流
+  - 现代小红书等主流App的内容浏览用户体验产品
+    两列、图片高度不一致、落差感
+    滚动加载更多，图片懒加载
+  - 接口
+    /api/images?page=${n} 支持翻页
+    唯一id  page + index
+    随机图片，高度随机
+  - images 怎么放到两列中？ MVVM
+  数据驱动界面（2列） 奇偶
+  - 加载更多 位于盒子底部的元素 通过使用IntersectionObserver
+  观察它是否出现在视窗，性能更好，使用了观察者模式
+  组件卸载时，直接使用disconnect 释放资源，防止内存泄露
+  - key  id 下拉刷新
+  - 使用IntersectionObserver 再次图片懒加载 data-src
 ## 项目亮点和难点
+
 - 移动端适配 还原设计稿
   - lib-flexible  1rem = 屏幕宽度/10
   - 设计稿 尺寸是iphone 标准尺寸 750px
@@ -140,6 +167,7 @@
       postcss + postcss-pxtorem
       postcss 自动将px转换为rem css预编译器
       vite自动读取postcss.config.js 将css文件编译
+
 - 原子css
   - 各自模块里module.css 不影响别的组件
   - postcss pxtorem 插件 快速还原设计稿
@@ -148,6 +176,7 @@
       一个元素按功能逻辑拆分成多个类，和原子一样
       元素的样式就可以由这些原子类组合而成
       样式可以复用的更好，以后几乎可以不用写样式
+
 - 自定义组件
   useTitle  切换页面标题也切换为对应的标题
 - 用户体验优化
@@ -157,11 +186,13 @@
   - SPA
   - 搜索建议  防抖
   - 热门推荐
+
 - 前端智能
   - chat 函数
   - 对各家模型比较感兴趣，升级为kimiChat、302ai...
     性能、能力、性价比
     随意切换大模型，通过参数抽象
+
 - coze 工作流
   - 智能生成图片
     - 产品
@@ -181,49 +212,64 @@
   - token 
   - workflowUrl + workflow_id + token
       工作流需要的参数
+
 - jwt 登录鉴权
   - 登录（mock）接口（api）
   - 颁发（sign）、验证（decode）token
+
 - 购物
   - 面向对象设计：使用 UIGoods 和 UIData 类封装数据和操作逻辑
   - 抛物线动画效果
   - 购物车跳动效果
+
 - Swiper 轮播图
 
 ## 项目遇到过什么问题，怎么解决的
+
 - es6 特性使用
   tabbar的高亮
   - arr.findIndex
   - str.startsWith
   - promise
+
 - Uncaught TypeError: hotList.map is not a function
   打印hotList  —— 对象？
   config拦截再加一层.data
+
 - 自定义hooks
   两次useEffect 和页面是否加载完成没关系
   直接去掉useEffect
+
 - chat messages 覆盖问题
   闭包问题 直接设置值导致
   (prev)=>{} 处理
+
 - 项目迭代
   - 功能由浅入深
   - chatbot deepseek 简单chat
   - coze工作流接口调用 查阅文档
+
 - 使用coze生成图像后上传问题
   - 使用useContext 存储用户信息并保存到localStorage
+
 - 数据过多遮挡输入框  css固定，不用flex
+
 - 抛物线实现
   - requestAnimationFrame  保证流畅
   - getBoundClientReact 获取位置
+
 - jwt 登录
   - 每次跳转/pay页面都要登录
   - 从localStorage获取token 初始化isLogin
+
 ## 通用组件开发
+
 - Loading
   - 居中方案
     position: fixed;+ tlrb0 + margin: auto;
   - React.memo 无状态组件，不重新渲染
   - animation
+  
 - RequireAuth
   - 登录检查
   - useUserStore获取
