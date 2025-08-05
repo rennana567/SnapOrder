@@ -62,6 +62,7 @@
     - Order
     - Search
   - store
+    - cartStore.js
     - useDetailStore.js
     - useSearchStore.js
     - useUserStore.js
@@ -212,10 +213,15 @@
 - 抛物线实现
   - requestAnimationFrame  保证流畅
   - getBoundClientReact 获取位置
-
+- jwt 登录
+  - 每次跳转/pay页面都要登录
+  - 从localStorage获取token 初始化isLogin
 ## 通用组件开发
 - Loading
   - 居中方案
     position: fixed;+ tlrb0 + margin: auto;
   - React.memo 无状态组件，不重新渲染
   - animation
+- RequireAuth
+  - 登录检查
+  - useUserStore获取

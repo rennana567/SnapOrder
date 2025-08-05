@@ -1,5 +1,6 @@
 import useTitle from "@/hooks/useTitle"
 import useDetailStore from "@/store/useDeatilStore"
+import useCartStore from "@/store/cartStore" // 添加这行
 import {
     Skeleton,
     Toast,
@@ -16,7 +17,18 @@ import { useNavigate } from "react-router-dom"
 const Detail = () => {
     useTitle("详情")
     const { loading, detail, setDetail } = useDetailStore()
+    const { 
+      cartItems, 
+      totalPrice, 
+      deliveryFee, 
+      deliveryThreshold,
+      addToCart,
+      updateQuantity,
+      getTotalQuantity,
+      isCrossDeliveryThreshold
+    } = useCartStore() // 使用购物车 store
     const navigate = useNavigate()
+    
     const [uiData, setUIData] = useState(null)
     const [activeMenu, setActiveMenu] = useState(0)
     const [flyingItems, setFlyingItems] = useState([])
@@ -36,9 +48,20 @@ const Detail = () => {
     ]
     
     useEffect(() => {
-        setDetail()
-    }, [])
-
+        if (!loading && detail) {
+            const data = new UIData(detail)
+            // 同步购物车状态到本地UI状态
+            cartItems.forEach(cartItem => {
+                if (data.uiGoods[cartItem.id]) {
+                    // 更新商品数量
+                    data.uiGoods[cartItem.id].choose = cartItem.quantity
+                }
+            })
+            setUIData(data)
+            uiDataRef.current = data
+        }
+    }, [loading, detail, cartItems])
+    
     // 商品数据
     class UIGoods {
         constructor(g) {
@@ -174,41 +197,56 @@ const Detail = () => {
             // 获取点击按钮的位置
             const button = event.target
             const startPos = getElementPosition(button)
-            
+
             // 获取购物车图标的位置
             const cartIcon = document.querySelector(`.${styles.cartIconWrapper}`)
             const endPos = cartIcon ? getElementPosition(cartIcon) : { x: window.innerWidth / 2, y: window.innerHeight - 40 }
-            
+
             // 抛物线动画
             createFlyingItem(startPos, endPos)
-            
+
             // 购物车动画
             carAnimate()
 
-            // 更新数据
+            // 更新数据到购物车 store
+            const goods = uiDataRef.current.uiGoods[index]
+            addToCart({
+                id: index,
+                name: goods.data.title,
+                price: goods.data.price,
+                pic: goods.data.pic
+            })
+
+            // 更新本地数据
             uiDataRef.current.increase(index)
-            setUIData({...uiDataRef.current}) // 创建新对象触发重新渲染
+            setUIData({...uiDataRef.current})
         }
     }
+
 
     // 处理减少商品数量
     const handleDecrease = (index) => {
         if (uiDataRef.current && uiDataRef.current.uiGoods[index].choose > 0) {
+            // 更新购物车 store
+            const goods = uiDataRef.current.uiGoods[index]
+            const newQuantity = goods.choose - 1
+            updateQuantity(index, newQuantity)
+
+            // 更新本地数据
             uiDataRef.current.decrease(index)
-            setUIData({...uiDataRef.current}) // 创建新对象触发重新渲染
+            setUIData({...uiDataRef.current})
         }
     }
-
     // 处理按钮事件
     const handleCheckout = () => {
         if (uiDataRef.current) {
-            if (!uiDataRef.current.hasGoodsInCar()) {
+            if (getTotalQuantity() === 0) {
                 Toast('购物车为空')
                 return
             }
             
-            if (!uiDataRef.current.isCrossDeliveryThreshold()) {
-                const diff = uiDataRef.current.deliveryThreshold - uiDataRef.current.getTotalPrice()
+            if (!isCrossDeliveryThreshold()) {
+                const diff = deliveryThreshold - totalPrice
                 Toast(`还差¥${diff.toFixed(2)}起送`)
                 return
             }
@@ -227,14 +265,8 @@ const Detail = () => {
     
     // 计算总支付金额（包含配送费）
     const getTotalPayment = () => {
-        if (!uiDataRef.current) return 0
-        const goodsTotal = uiDataRef.current.getTotalPrice()
-        if (goodsTotal <= 0) return 0
-        
-        if (uiDataRef.current.isCrossDeliveryThreshold()) {
-            return goodsTotal + uiDataRef.current.deliveryPrice
-        }
-        return goodsTotal
+        if (totalPrice <= 0) return 0
+        return isCrossDeliveryThreshold() ? totalPrice + deliveryFee : totalPrice
     }
 
     // 添加购物车动画方法

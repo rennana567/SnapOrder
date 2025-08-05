@@ -13,6 +13,7 @@ import MainLayout from '@/components/MainLayout'
 import BlankLayout from '@/components/BlankLayout'
 import Loading from '@/components/Loading'
 import { UserProvider } from '@/contexts/UserContext'
+import RequireAuth from '@/components/RequireAuth'
 
 const Home = lazy(() => import('@/pages/Home'))
 const Search = lazy(() => import('@/pages/Search'))
@@ -22,8 +23,8 @@ const Account = lazy(() => import('@/pages/Account'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 const Consultant = lazy(() => import('@/pages/Consultant'))
 const Coze = lazy(() => import('@/pages/Coze'))
-const RequireAuth = lazy(() => import('@/components/RequireAuth'))
 const Detail = lazy(() => import('@/pages/Detail'))
+const Pay = lazy(() => import('@/pages/Pay'))
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
+            <Route path="/account" element={<Account />} />
             <Route path="/order" element={<Order />} />
             <Route path="/consultant" element={<Consultant />} />
           </Route>
@@ -45,7 +46,12 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/search" element={<Search />} />
             <Route path="/coze" element={<Coze />} />
-          <Route path="/detail/123" element={<Detail />} />
+            <Route path="/detail/123" element={<Detail />} />
+            <Route path="/pay" element={
+              <RequireAuth>
+                <Pay />
+              </RequireAuth>
+            } />
           </Route>
           <Route path="/*" element={<NotFound />} />
         </Routes>

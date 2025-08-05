@@ -22,7 +22,7 @@ const Login = () => {
         }
         login({ username, password })
         setTimeout(()=>{
-            navigate('/account')
+            navigate('/pay')
         },1000)
     }
     return (

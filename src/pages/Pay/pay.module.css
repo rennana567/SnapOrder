@@ -1,0 +1,265 @@
+/* src/pages/Pay/pay.module.css */
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 80px;
+  position: relative;
+}
+
+/* 头部 */
+.header {
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(255, 107, 53, 0.3);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.countdown {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.time {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* 订单信息 */
+.orderInfo {
+  margin: 20px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.orderItem:last-child {
+  margin-bottom: 0;
+}
+
+/* 商品信息 */
+.goodsItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed #f0f0f0;
+}
+
+.goodsItem:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.goodsName {
+  font-size: 16px;
+  color: #333;
+}
+
+.quantity {
+  color: #999;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.goodsPrice {
+  color: #ff6b35;
+  font-weight: 500;
+}
+
+/* 费用明细 */
+.feeItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.totalAmount {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+.amount {
+  color: #ff6b35;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* 支付方式 */
+.paymentMethods {
+  margin: 20px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.paymentMethod {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+}
+
+.paymentIcon {
+  margin-right: 15px;
+}
+
+.walletIcon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+.paymentInfo {
+  flex: 1;
+}
+
+.paymentName {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.paymentDesc {
+  font-size: 12px;
+  color: #999;
+}
+
+.paymentCheck {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ff6b35;
+  border-radius: 50%;
+  position: relative;
+}
+
+.paymentCheck::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  background-color: #ff6b35;
+}
+
+/* 底部按钮 */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 20px 25px;
+  background: white;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.payButton {
+  height: 50px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* 加载遮罩 */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loadingText {
+  color: white;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .container {
+    padding-bottom: 100px;
+  }
+  
+  .header {
+    padding: 15px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .orderInfo,
+  .paymentMethods {
+    margin: 15px;
+    padding: 15px;
+  }
+  
+  .footer {
+    padding: 12px 15px 20px;
+  }
+  
+  .payButton {
+    height: 45px;
+    font-size: 15px;
+  }
+}
